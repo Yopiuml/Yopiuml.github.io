@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hello World," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -84,16 +84,31 @@
 
 
 
-<meta name="description" content="左手代码，右手诗。">
+<meta name="description" content="js表格操作类2&amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;gt;
+    var mytable = null;
+    window.onload = function () {
+        mytable = new CTable(&amp;quot;tbl&amp;quot;, 10);      //随机创建10行表格
+    }
+    Array.pr">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2016/09/03/Hello-World-0/index.html">
+<meta property="og:title" content="SoulAssassin">
+<meta property="og:url" content="http://yoursite.com/2016/09/04/js表格操作类2/index.html">
 <meta property="og:site_name" content="SoulAssassin">
-<meta property="og:description" content="左手代码，右手诗。">
-<meta property="og:updated_time" content="2016-09-03T17:00:57.372Z">
+<meta property="og:description" content="js表格操作类2&amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;gt;
+    var mytable = null;
+    window.onload = function () {
+        mytable = new CTable(&amp;quot;tbl&amp;quot;, 10);      //随机创建10行表格
+    }
+    Array.pr">
+<meta property="og:updated_time" content="2016-09-03T17:20:15.117Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="左手代码，右手诗。">
+<meta name="twitter:title" content="SoulAssassin">
+<meta name="twitter:description" content="js表格操作类2&amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;gt;
+    var mytable = null;
+    window.onload = function () {
+        mytable = new CTable(&amp;quot;tbl&amp;quot;, 10);      //随机创建10行表格
+    }
+    Array.pr">
 
 
 
@@ -114,9 +129,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/09/03/Hello-World-0/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/09/04/js表格操作类2/"/>
 
-  <title> Hello World | SoulAssassin </title>
+  <title>  | SoulAssassin </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -236,7 +251,7 @@
             
             
               
-                Hello World
+                
               
             
           </h1>
@@ -248,8 +263,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-03T23:38:10+08:00" content="2016-09-03">
-              2016-09-03
+            <time itemprop="dateCreated" datetime="2016-09-04T01:19:22+08:00" content="2016-09-04">
+              2016-09-04
             </time>
           </span>
 
@@ -276,7 +291,151 @@
       
 
       
-        
+        <h1 id="js表格操作类2"><a href="#js表格操作类2" class="headerlink" title="js表格操作类2"></a>js表格操作类2</h1><pre><code>&lt;script type=&quot;text/javascript&quot;&gt;
+    var mytable = null;
+    window.onload = function () {
+        mytable = new CTable(&quot;tbl&quot;, 10);      //随机创建10行表格
+    }
+    Array.prototype.each = function (f) {  //数组的遍历
+        for (var i = 0; i &lt; this.length; i++) f(this[i], i, this)
+    }
+    function $A(arrayLike) {            //数值的填充
+        for (var i = 0, ret = []; i &lt; arrayLike.length; i++) ret.push(arrayLike[i]);
+        return ret
+    }
+    Function.prototype.bind = function () {  //数据的绑定
+        var __method = this, args = $A(arguments), object = args.shift();
+        return function () {
+            return __method.apply(object, args.concat($A(arguments)));
+        }
+    }
+    function CTable(id, rows) {
+        this.tbl = typeof (id) == &quot;string&quot; ? document.getElementById(id) : id;
+        if (rows &amp;&amp; /^\d+$/.test(rows)) this.addrows(rows)    //为表格添加行数
+    }
+    CTable.prototype = {
+        addrows: function (n) {          //随机添加n行
+            new Array(n).each(this.add.bind(this))
+        },
+        add: function () {              //添加1行
+            var self = this;
+            var tr = self.tbl.insertRow(-1), td1 = tr.insertCell(-1), td2 = tr.insertCell(-1), td3 = tr.insertCell(-1);
+            var chkbox = document.createElement(&quot;INPUT&quot;)
+            chkbox.type = &quot;checkbox&quot;
+            chkbox.onclick = self.highlight.bind(self)
+            td1.appendChild(chkbox)                    //第一列添加复选框
+            td1.setAttribute(&quot;width&quot;, &quot;35&quot;)
+            td2.innerHTML = Math.ceil(Math.random() * 99)  //第二列的随机填充值
+            td3.innerHTML = Math.ceil(Math.random() * 99)  //第三列的随机填充值
+        },
+        del: function () {              //删除所选行
+            var self = this
+            $A(self.tbl.rows).each(function (tr) { if (self.getChkBox(tr).checked) tr.parentNode.removeChild(tr) })
+        },
+        up: function () {              //上移所选行
+            var self = this
+            var upOne = function (tr) {    //上移1行
+                if (tr.rowIndex &gt; 0) {
+                    self.swapTr(tr, self.tbl.rows[tr.rowIndex - 1])
+                    self.getChkBox(tr).checked = true
+                }
+            }
+            var arr = $A(self.tbl.rows).reverse() //反选
+            if (arr.length &gt; 0 &amp;&amp; self.getChkBox(arr[arr.length - 1]).checked) {
+                for (var i = arr.length - 1; i &gt;= 0; i--) {
+                    if (self.getChkBox(arr[i]).checked) {
+                        arr.pop()
+                    } else {
+                        break
+                    }
+                }
+            }
+            arr.reverse().each(function (tr) { if (self.getChkBox(tr).checked) upOne(tr) });
+        },
+        down: function () {          //下移所选行
+            var self = this
+            var downOne = function (tr) {
+                if (tr.rowIndex &lt; self.tbl.rows.length - 1) {
+                    self.swapTr(tr, self.tbl.rows[tr.rowIndex + 1]);
+                    self.getChkBox(tr).checked = true;
+                }
+            }
+            var arr = $A(self.tbl.rows)
+            if (arr.length &gt; 0 &amp;&amp; self.getChkBox(arr[arr.length - 1]).checked) {
+                for (var i = arr.length - 1; i &gt;= 0; i--) {
+                    if (self.getChkBox(arr[i]).checked) {
+                        arr.pop()
+                    } else {
+                        break
+                    }
+                }
+            }
+            arr.reverse().each(function (tr) { if (self.getChkBox(tr).checked) downOne(tr) });
+        },
+        sort: function () {                //排序  
+            var self = this, order = arguments[0];
+            var sortBy = function (a, b) {
+                if (typeof (order) == &quot;number&quot;) {  //数字,则按数字指示的列排序
+                    return Number(a.cells[order].innerHTML) &gt;= Number(b.cells[order].innerHTML) ? 1 : -1;   //转化为数字类型比较大小
+                } else if (typeof (order) == &quot;function&quot;) {                                             //返回结果排序
+                    return order(a, b);
+                } else {
+                    return 1;
+                }
+            }
+            $A(self.tbl.rows).sort(sortBy).each(function (x) {
+                var checkStatus = self.getChkBox(x).checked;
+                self.tbl.firstChild.appendChild(x);
+                if (checkStatus) self.getChkBox(x).checked = checkStatus;
+            });
+        },
+        rnd: function () {           //随即选择几行数据
+            var self = this, selmax = 0, tbl = self.tbl;
+            if (tbl.rows.length) {
+                selmax = Math.max(Math.ceil(tbl.rows.length / 4), 1);  //选择的行数不超过tr数的1/4
+                $A(tbl.rows).each(function (x) {
+                    self.getChkBox(x).checked = false;
+                    self.restoreBgColor(x)
+                })
+            } else {
+                return alert(&quot;无数据可以选&quot;)
+            }
+            new Array(selmax).each(function () {
+                var tr = tbl.rows[Math.floor(Math.random() * tbl.rows.length)]
+                self.getChkBox(tr).checked = true;
+                self.highlight({ target: self.getChkBox(tr) })
+            })
+        },
+        highlight: function () {               //设置行的背景色
+            var self = this;
+            var evt = arguments[0] || window.event
+            var chkbox = evt.srcElement || evt.target
+            var tr = chkbox.parentNode.parentNode
+            chkbox.checked ? self.setBgColor(tr) : self.restoreBgColor(tr)
+        },
+        swapTr: function (tr1, tr2) {             //交换tr1和tr2的位置
+            var target = (tr1.rowIndex &lt; tr2.rowIndex) ? tr2.nextSibling : tr2;
+            var tBody = tr1.parentNode
+            tBody.replaceChild(tr2, tr1);
+            tBody.insertBefore(tr1, target);
+        },
+        getChkBox: function (tr) {           //从tr得到 checkbox对象
+            return tr.cells[0].firstChild
+        },
+        restoreBgColor: function (tr) {
+            tr.style.backgroundColor = &quot;#ffffff&quot;
+        },
+        setBgColor: function (tr) {         //设置背景色
+            tr.style.backgroundColor = &quot;#c0c0c0&quot;
+        }
+    }
+
+    function f(a, b) {
+        var sumRow = function (row) { return Number(row.cells[1].innerHTML) + Number(row.cells[2].innerHTML) };
+        return sumRow(a) &gt; sumRow(b) ? 1 : -1;
+    }
+&lt;/script&gt;
+</code></pre>
       
     </div>
 
@@ -296,22 +455,20 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/Hello-World/" rel="tag">#Hello World</a>
-          
-        </div>
-      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/09/04/js表格操作类/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/09/04/js表格操作类/" rel="prev" title="">
+              <a href="/2016/09/04/mongodb操作/" rel="prev" title="">
                  <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -420,7 +577,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#js表格操作类2"><span class="nav-number">1.</span> <span class="nav-text">js表格操作类2</span></a></li></ol></div>
             
           </div>
         </section>
