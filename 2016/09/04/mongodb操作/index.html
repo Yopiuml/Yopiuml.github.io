@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="mongodb," />
 
 
 
@@ -93,7 +93,7 @@ $inc, $set,$unset,$push,$ne/$addToSet,$pop、$pull,&amp;quot;$&amp;quot;,upsert
 
 http://docs.mongodb.org/manual/tu">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SoulAssassin">
+<meta property="og:title" content="mongodb内嵌文档 操作">
 <meta property="og:url" content="http://yoursite.com/2016/09/04/mongodb操作/index.html">
 <meta property="og:site_name" content="SoulAssassin">
 <meta property="og:description" content="mongodb内嵌文档 操作
@@ -104,9 +104,9 @@ $inc, $set,$unset,$push,$ne/$addToSet,$pop、$pull,&amp;quot;$&amp;quot;,upsert
 官方文档
 
 http://docs.mongodb.org/manual/tu">
-<meta property="og:updated_time" content="2016-09-03T17:30:28.077Z">
+<meta property="og:updated_time" content="2016-09-03T17:36:16.029Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SoulAssassin">
+<meta name="twitter:title" content="mongodb内嵌文档 操作">
 <meta name="twitter:description" content="mongodb内嵌文档 操作
 http://blog.csdn.net/mcpang/article/details/7752736
 
@@ -137,7 +137,7 @@ http://docs.mongodb.org/manual/tu">
 
   <link rel="canonical" href="http://yoursite.com/2016/09/04/mongodb操作/"/>
 
-  <title>  | SoulAssassin </title>
+  <title> mongodb内嵌文档 操作 | SoulAssassin </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -172,7 +172,7 @@ http://docs.mongodb.org/manual/tu">
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
-  <p class="site-subtitle">左手代码，右手诗。</p>
+  <p class="site-subtitle">世界和平</p>
 </div>
 
 <div class="site-nav-toggle">
@@ -206,16 +206,6 @@ http://docs.mongodb.org/manual/tu">
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
-            
-            标签
           </a>
         </li>
       
@@ -257,7 +247,7 @@ http://docs.mongodb.org/manual/tu">
             
             
               
-                
+                mongodb内嵌文档 操作
               
             
           </h1>
@@ -269,7 +259,7 @@ http://docs.mongodb.org/manual/tu">
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-04T01:22:33+08:00" content="2016-09-04">
+            <time itemprop="dateCreated" datetime="2016-09-04T01:33:17+08:00" content="2016-09-04">
               2016-09-04
             </time>
           </span>
@@ -307,7 +297,7 @@ http://docs.mongodb.org/manual/tu">
 <pre><code>http://docs.mongodb.org/manual/tutorial/modify-documents/ 看不懂英文，只能苦逼。。
 </code></pre></blockquote>
 <p>原文如下：</p>
-<p>对于文档的更新除替换外，针对某个或多个文档只需要部分更新可使用原子的更新修改器，能够高效的进行文档更新。更新修改器是中特殊的键，<br>用来指定复杂的操作，比如增加、删除或者调整键，还可能是操作数组或者内嵌文档。</p>
+<p>对于文档的更新除替换外，针对某个或多个文档只需要部分更新可使用原子的更新修改器，能够高效的进行文档更新。更新修改器是中特殊的键，<br>用来指定复杂的操作，比如增加、删除或者调整键，还可能是操作数组或者内嵌文档。<br><a id="more"></a></p>
 <h2 id="1-inc"><a href="#1-inc" class="headerlink" title="1.$inc"></a>1.$inc</h2><p>这个修改器干什么使的呢？看看下面示例的具体操作后的结果即可知道。</p>
 <p>示例文档:</p>
 <pre><code>{&quot;uid&quot;:&quot;201203&quot;,&quot;type&quot;:&quot;1&quot;,size:10}
@@ -555,18 +545,28 @@ Cannot apply $push/$pushAll modifier to non-array
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/mongodb/" rel="tag">#mongodb</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/09/04/js表格操作类2/" rel="next" title="">
-                <i class="fa fa-chevron-left"></i> 
+              <a href="/2016/09/03/Hello-World-0/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/04/js表格操作类/" rel="prev" title="js表格操作类">
+                js表格操作类 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -618,7 +618,7 @@ Cannot apply $push/$pushAll modifier to non-array
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
+            关于
           </li>
         </ul>
       
@@ -643,10 +643,10 @@ Cannot apply $push/$pushAll modifier to non-array
 
           
             <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">1</span>
+              
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">标签</span>
-              </a>
+              
             </div>
           
 
